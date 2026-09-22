@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cricket Selections Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --primary: #1e88e5;
+      --primary-dark: #1565c0;
+      --accent: #ffca28;
+      --bg: #f5f7fb;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #e3f2fd 0%, #f5f7fb 100%);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    header p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      padding: 22px 20px 26px;
+      border: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #374151;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      background: #fafafa;
+      color: var(--text);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.12);
+      background: #fff;
+    }
+
+    .radio-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fafafa;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      user-select: none;
+    }
+
+    .radio-option:hover {
+      border-color: #c7d2fe;
+      background: #f0f4ff;
+    }
+
+    .radio-option input {
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+    }
+
+    .radio-option span {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.06s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      box-shadow: 0 8px 20px rgba(30, 136, 229, 0.25);
+      margin-top: 6px;
+    }
+
+    .btn:hover {
+      filter: brightness(1.03);
+      box-shadow: 0 10px 26px rgba(30, 136, 229, 0.32);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 420px) {
+      .radio-group {
+        grid-template-columns: 1fr;
+      }
+      header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Cricket Selections Registration</h1>
+      <p>Register as a Bowler, Batsman, All-rounder, or Wicket-keeper</p>
+    </header>
+
+    <div class="card">
+      <form id="registrationForm">
+        <div class="section-title">Player Details</div>
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="e.g., Saicharan Teja" required />
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" min="12" max="60" placeholder="e.g., 20" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="e.g., 9876543210" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email (optional)</label>
+          <input type="email" id="email" name="email" placeholder="e.g., teja@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="e.g., Hyderabad" required />
+        </div>
+
+        <div class="section-title" style="margin-top: 10px;">Playing Category</div>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="category" value="Bowler" required />
+            <span>Bowler</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category" value="Batsman" />
+            <span>Batsman</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category" value="All-rounder" />
+            <span>All-rounder</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category" value="Wicket-keeper" />
+            <span>Wicket-keeper</span>
+          </label>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label for="experience">Years of Playing Experience</label>
+          <select id="experience" name="experience">
+            <option value="" disabled selected>Select experience</option>
+            <option value="Beginner">Beginner (0–1 years)</option>
+            <option value="Intermediate">Intermediate (2–4 years)</option>
+            <option value="Advanced">Advanced (5+ years)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Additional Notes (optional)</label>
+          <textarea id="notes" name="notes" rows="3" placeholder="Any special skills, preferred role, etc."></textarea>
+        </div>
+
+        <button type="submit" class="btn">Register Now</button>
+
+        <div id="successMessage" class="success-message">
+          Registration submitted successfully! We’ll contact you soon.
+        </div>
+      </form>
+    </div>
+
+    <p class="footer-note">
+      This is a demo registration form. Connect it to a backend or Google Sheet to store data.
+    </p>
+  </div>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Basic validation is already handled by HTML5 required/min/max attributes.
+      // Here you can add code to send data to a server or Google Sheet.
+
+      // For demo, just show success message and reset form.
+      successMessage.style.display = "block";
+      form.reset();
+
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 4000);
+    });
+  </script>
+</body>
+</html>
